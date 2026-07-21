@@ -42,3 +42,10 @@ class FeedbackOut(BaseModel):
     confidence: Optional[float] = None
     flagged_for_review: bool = False
     theme_id: Optional[int] = None
+
+
+class ThemeLabel(BaseModel):
+    """LLM-proposed name + keywords for a new theme."""
+
+    label: str = Field(min_length=1, max_length=60)
+    keywords: str = Field(min_length=1)
