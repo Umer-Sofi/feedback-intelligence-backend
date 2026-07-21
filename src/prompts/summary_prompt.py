@@ -1,0 +1,33 @@
+"""Prompt for the weekly narrative summary (grounded in real feedback)."""
+
+import json
+
+
+def build_summary_messages(stats: dict, quotes: list[dict]) -> list[dict]:
+    """Build messages for the weekly narrative from stats + quotes."""
+    system = (
+        "You are an analyst writing a weekly customer-feedback summary for "
+        "a product team. Write a concise narrative of 3-5 short paragraphs "
+        "that:\n"
+        "  - states overall sentiment and volume,\n"
+        "  - highlights the top themes and any week-over-week movement,\n"
+        "  - calls out notable issues (bugs, pricing, churn signals),\n"
+        "  - ends with 2-3 concrete, prioritized recommendations.\n\n"
+        "Ground every claim in the provided data. Do NOT invent numbers or "
+        "quotes. Reference real quotes where useful. Plain prose, no JSON."
+    )
+    quote_lines = "\n".join(
+        f'- ({q.get("category")}/{q.get("sentiment")}) "{q["text"]}"'
+        for q in quotes
+    )
+    user = (
+        "Aggregated stats (JSON):\n"
+        f"{json.dumps(stats, default=str, indent=2)}\n\n"
+        "Representative feedback quotes:\n"
+        f"{quote_lines or '(none)'}\n\n"
+        "Write the weekly summary now."
+    )
+    return [
+        {"role": "system", "content": system},
+        {"role": "user", "content": user},
+    ]
