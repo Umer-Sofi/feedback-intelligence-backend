@@ -1,4 +1,4 @@
-"""SQLAlchemy engine, session factory, and declarative base for SQLite."""
+"""SQLAlchemy engine, session factory, and declarative base for Postgres."""
 
 from collections.abc import Generator
 
@@ -9,11 +9,11 @@ from src.core.config import get_settings
 
 settings = get_settings()
 
-# SQLite requires check_same_thread=False so the connection can be reused
-# across FastAPI's threadpool. Safe here: one local, single-writer file DB.
+# pool_pre_ping recycles dead connections (e.g. after the DB container
+# restarts) so requests don't fail on a stale pooled connection.
 engine = create_engine(
     settings.database_url,
-    connect_args={"check_same_thread": False},
+    pool_pre_ping=True,
     echo=False,
 )
 

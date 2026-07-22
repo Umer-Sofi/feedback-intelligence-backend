@@ -1,4 +1,4 @@
-"""Aggregate analytics over processed feedback (reads SQLite only)."""
+"""Aggregate analytics over processed feedback (reads the database only)."""
 
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone

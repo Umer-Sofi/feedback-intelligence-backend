@@ -3,10 +3,14 @@
 from datetime import datetime, timezone
 from typing import Optional
 
+from pgvector.sqlalchemy import Vector
 from sqlalchemy import Boolean, DateTime, Float, ForeignKey, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from src.core.config import get_settings
 from src.database.database import Base
+
+_EMBEDDING_DIM = get_settings().embedding_dim
 
 
 def _utcnow() -> datetime:
@@ -21,8 +25,14 @@ class Theme(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     label: Mapped[str] = mapped_column(String(200))
+    keywords: Mapped[Optional[str]] = mapped_column(Text, default=None)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=_utcnow
+    )
+
+    # Vector of the theme's keywords — powers nearest-theme matching.
+    embedding: Mapped[Optional[list[float]]] = mapped_column(
+        Vector(_EMBEDDING_DIM), default=None
     )
 
     feedback_items: Mapped[list["Feedback"]] = relationship(
@@ -54,6 +64,11 @@ class Feedback(Base):
     flagged_for_review: Mapped[bool] = mapped_column(Boolean, default=False)
     processed_at: Mapped[Optional[datetime]] = mapped_column(
         DateTime(timezone=True), default=None
+    )
+
+    # Vector of the feedback text — powers RAG retrieval.
+    embedding: Mapped[Optional[list[float]]] = mapped_column(
+        Vector(_EMBEDDING_DIM), default=None
     )
 
     # Theme link — assigned by the theme aggregator via vector similarity.

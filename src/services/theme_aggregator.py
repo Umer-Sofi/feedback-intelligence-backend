@@ -2,7 +2,7 @@
 
 For each feedback item: find the nearest existing theme. If it is within
 THEME_SIMILARITY_THRESHOLD, join it; otherwise ask the LLM to name a new
-theme, persist it to SQLite, and register its vector in ChromaDB.
+theme, persist it to Postgres, and store its vector via pgvector.
 """
 
 from sqlalchemy.orm import Session

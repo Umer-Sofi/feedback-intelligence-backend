@@ -1,8 +1,8 @@
-"""Load the processed feedback dataset into SQLite + ChromaDB.
+"""Load the processed feedback dataset into Postgres (+ pgvector).
 
 Reads data/feedback.csv, inserts each row as an UNPROCESSED feedback record,
-and (unless --skip-embeddings) stores its embedding in the feedback_embeddings
-collection. This is the ONLY ingestion path — never an API call. Run manually
+and (unless --skip-embeddings) stores its embedding vector on the row via
+pgvector. This is the ONLY ingestion path — never an API call. Run manually
 or via cron.
 """
 

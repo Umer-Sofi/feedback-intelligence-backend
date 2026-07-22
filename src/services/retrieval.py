@@ -1,4 +1,4 @@
-"""RAG retrieval: find feedback relevant to a query, enriched from SQLite."""
+"""RAG retrieval: find feedback relevant to a query, enriched from the DB."""
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -15,7 +15,7 @@ def retrieve_relevant(
 ) -> list[dict]:
     """Return feedback most relevant to `query`, with category/sentiment.
 
-    Vector search finds the items; SQLite supplies their structured fields
+    Vector search finds the items; Postgres supplies their structured fields
     so callers can cite and ground on real records.
     """
     hits = vector_store.search_feedback(query, n_results=n_results)

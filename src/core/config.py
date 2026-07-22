@@ -13,9 +13,12 @@ class Settings(BaseSettings):
     openai_chat_model: str = "gpt-4o-mini"
     openai_embedding_model: str = "text-embedding-3-small"
 
-    # Databases (file-based, no server)
-    database_url: str = "sqlite:///./feedback.db"
-    chroma_persist_dir: str = "./chroma_store"
+    # Database (Postgres + pgvector — structured data AND vectors in one DB).
+    database_url: str = (
+        "postgresql+psycopg://feedback:feedback@localhost:5432/feedback"
+    )
+    # Dimension of the OpenAI embedding model (text-embedding-3-small = 1536).
+    embedding_dim: int = 1536
 
     # Theme aggregation: below this cosine distance, join an existing theme.
     theme_similarity_threshold: float = 0.35
