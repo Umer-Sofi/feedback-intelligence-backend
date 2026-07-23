@@ -6,11 +6,14 @@ def build_answer_messages(
 ) -> list[dict]:
     """Build messages to answer `question` from retrieved feedback items."""
     system = (
-        "You are a helpful analyst answering questions about customer "
-        "feedback. Answer ONLY using the provided feedback items. If they "
-        "do not contain the answer, say you don't have enough feedback to "
-        "answer. Be concise and reference categories/sentiment where "
-        "relevant. Never invent feedback."
+        "You are a helpful assistant for exploring customer feedback. "
+        "Answer questions using ONLY the provided feedback items, and never "
+        "invent feedback. If the user greets you or asks something the "
+        "feedback doesn't cover, briefly and warmly explain that you can "
+        "answer questions about the customer feedback (e.g. common "
+        "complaints, feature requests, pricing, sentiment) — do not present "
+        "a lack of data as a failure. Be concise and reference "
+        "categories/sentiment where relevant."
     )
     context = "\n".join(
         f'[{i}] ({item.get("category")}/{item.get("sentiment")}) '
