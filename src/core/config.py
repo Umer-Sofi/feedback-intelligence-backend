@@ -21,7 +21,8 @@ class Settings(BaseSettings):
     embedding_dim: int = 1536
 
     # Theme aggregation: below this cosine distance, join an existing theme.
-    theme_similarity_threshold: float = 0.35
+    # Tuned for OpenAI embeddings vs theme-keyword vectors (median ~0.58).
+    theme_similarity_threshold: float = 0.58
 
     # Classifications below this confidence get flagged for review.
     low_confidence_threshold: float = 0.6
