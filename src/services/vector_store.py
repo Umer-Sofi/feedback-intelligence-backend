@@ -1,8 +1,9 @@
 """Vector storage + similarity search backed by Postgres + pgvector.
 
-Embeddings live in the same Postgres tables as the structured data:
-  - feedback.embedding  -> one vector per feedback item (powers RAG retrieval)
-  - themes.embedding     -> one vector per named theme (powers theme matching)
+Embeddings live in dedicated tables, kept separate from the structured data:
+  - feedback_chunks.embedding -> one vector PER PASSAGE of a feedback item
+    (a long feedback is split into several chunks; powers RAG retrieval)
+  - themes.embedding          -> one vector per named theme (theme matching)
 
 Embeddings come from OpenAI (via openai_client.embed); pgvector does the
 cosine-distance nearest-neighbor search. No clustering — grouping is
@@ -12,25 +13,38 @@ nearest-neighbor lookup. The public API is stable, so callers
 
 from typing import Optional
 
-from sqlalchemy import select
+from sqlalchemy import delete, select
 
 from src.database.database import SessionLocal
-from src.models.feedback import Feedback, Theme
+from src.models.feedback import FeedbackChunk, Theme
+from src.services.chunking import chunk_text
 from src.services.openai_client import embed
-from src.utils.logger import get_logger
-
-logger = get_logger(__name__)
 
 
 def add_feedback(feedback_id: int, text: str) -> None:
-    """Embed a feedback item and store the vector on its row."""
-    vector = embed([text])[0]
+    """Chunk a feedback item, embed each chunk, and store the chunk rows."""
+    chunks = chunk_text(text)
+    if not chunks:
+        return
+    vectors = embed(chunks)
     db = SessionLocal()
     try:
-        item = db.get(Feedback, feedback_id)
-        if item is not None:
-            item.embedding = vector
-            db.commit()
+        # Replace any existing chunks (e.g. if the item is re-processed).
+        db.execute(
+            delete(FeedbackChunk).where(
+                FeedbackChunk.feedback_id == feedback_id
+            )
+        )
+        for index, (chunk, vector) in enumerate(zip(chunks, vectors)):
+            db.add(
+                FeedbackChunk(
+                    feedback_id=feedback_id,
+                    chunk_index=index,
+                    chunk_text=chunk,
+                    embedding=vector,
+                )
+            )
+        db.commit()
     finally:
         db.close()
 
@@ -78,20 +92,36 @@ def nearest_theme(text: str) -> Optional[dict]:
 
 
 def search_feedback(query: str, n_results: int = 5) -> list[dict]:
-    """Return the feedback items most similar to `query` (for RAG)."""
+    """Return the feedback items most similar to `query` (for RAG).
+
+    Searches at the chunk level, then collapses chunks back to their parent
+    feedback so each item appears once, represented by its closest passage.
+    """
     vector = embed([query])[0]
     db = SessionLocal()
     try:
-        distance = Feedback.embedding.cosine_distance(vector)
+        distance = FeedbackChunk.embedding.cosine_distance(vector)
+        # Over-fetch: several top chunks may share a parent, so we need extra
+        # rows to still end up with `n_results` distinct feedback items.
         rows = db.execute(
-            select(Feedback, distance.label("distance"))
-            .where(Feedback.embedding.is_not(None))
+            select(FeedbackChunk, distance.label("distance"))
+            .where(FeedbackChunk.embedding.is_not(None))
             .order_by(distance)
-            .limit(n_results)
+            .limit(n_results * 4)
         ).all()
-        return [
-            {"feedback_id": item.id, "text": item.text, "distance": dist}
-            for item, dist in rows
-        ]
+        best: dict[int, dict] = {}
+        for chunk, dist in rows:
+            # Rows are distance-ordered, so the first chunk seen for a
+            # feedback is its closest one — keep that, skip the rest.
+            if chunk.feedback_id in best:
+                continue
+            best[chunk.feedback_id] = {
+                "feedback_id": chunk.feedback_id,
+                "text": chunk.chunk_text,
+                "distance": dist,
+            }
+            if len(best) >= n_results:
+                break
+        return list(best.values())
     finally:
         db.close()
