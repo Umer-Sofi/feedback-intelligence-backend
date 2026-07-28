@@ -7,7 +7,6 @@ scheduler and NOT run on API startup. For each unprocessed feedback row it:
   3. assigns a theme via vector similarity (services/theme_aggregator).
 """
 
-from datetime import datetime, timezone
 from typing import Optional
 
 from sqlalchemy import select
@@ -21,10 +20,6 @@ from src.utils.logger import get_logger
 logger = get_logger(__name__)
 
 
-def _utcnow() -> datetime:
-    return datetime.now(timezone.utc)
-
-
 def process_feedback_item(db: Session, item: Feedback) -> None:
     """Classify, persist, flag, and theme a single feedback item."""
     result = classifier.classify(item.text)
@@ -34,10 +29,9 @@ def process_feedback_item(db: Session, item: Feedback) -> None:
     item.confidence = result.confidence
     item.flagged_for_review = classifier.is_low_confidence(result)
     item.processed = True
-    item.processed_at = _utcnow()
     db.commit()
 
-    # Ensure the item's embedding exists for RAG (load may have skipped it).
+    # Ensure the item's chunks + embeddings exist for RAG (load may skip them).
     vector_store.add_feedback(item.id, item.text)
     theme_aggregator.assign_theme(db, item)
 

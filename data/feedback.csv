@@ -1,151 +1,151 @@
-source,text,created_at,category,sentiment
-survey,"The workflow mostly fits how our team works but I still click around more than I expect. A few shortcuts would help.",2026-05-26T09:14:22,usability,neutral
-review,"Really impressed with how stable everything has been lately. It quietly gets the job done.",2026-05-26T14:47:51,praise,positive
-support_ticket,"Pages keep freezing after I save changes. Had to refresh twice this morning.",2026-05-27T08:19:33,bug,negative
-survey,"Would love a way to pin frequently used dashboards instead of searching every time.",2026-05-27T16:52:40,feature_request,neutral
-review,"The response time feels snappy even with larger projects. Nice improvement.",2026-05-28T10:21:09,performance,positive
-support_ticket,"Our invoice total doesn't match what we expected this month. Can someone explain the extra charge?",2026-05-28T18:37:55,pricing,negative
-review,"Setup was easier than I feared. New teammates were productive within a day.",2026-05-29T11:02:47,onboarding,positive
-survey,"Overall it's fine. Nothing major stands out either way.",2026-05-29T20:11:31,other,neutral
-support_ticket,"After today's update some fields stop saving correctly. It's slowing everyone down.",2026-05-30T09:43:58,bug,negative
-review,"Customer support actually followed up without us chasing them. Appreciate that.",2026-05-30T15:17:12,customer_support,positive
-survey,"I'd like custom notification rules for different projects. Right now it's all or nothing.",2026-05-31T13:08:44,feature_request,neutral
-review,"Honestly one of the smoother tools we've rolled out this year.",2026-05-31T19:24:07,praise,positive
-support_ticket,"The app takes forever to load large reports now. Last week it was much faster.",2026-06-01T08:58:13,performance,negative
-survey,"Navigation makes sense after using it awhile but new users get lost at first.",2026-06-01T17:06:22,usability,neutral
-support_ticket,"I'm seeing random error messages when editing records. Didn't happen before.",2026-06-02T10:15:19,bug,negative
-review,"Love the clean layout. It keeps distractions to a minimum.",2026-06-02T18:33:28,praise,positive
-survey,"Could you add scheduled exports every Friday? That would save manual work.",2026-06-03T09:27:35,feature_request,neutral
-support_ticket,"The renewal cost jumped more than we budgeted for. We need clarification.",2026-06-03T16:54:42,pricing,negative
-review,"Support was friendly and explained everything clearly.",2026-06-04T11:12:56,customer_support,positive
-support_ticket,"First login was confusing because I wasn't sure what to configure first.",2026-06-04T19:41:07,onboarding,negative
-survey,"Nothing urgent to report. Just sharing general feedback after a few weeks.",2026-06-05T08:31:26,other,neutral
-support_ticket,"Search stopped returning expected results after lunch. Pretty frustrating.",2026-06-05T14:23:41,bug,negative
-review,"Performance has been consistently solid during our busiest hours.",2026-06-06T10:09:58,performance,positive
-survey,"I'd really like keyboard shortcuts for repetitive actions.",2026-06-06T17:58:10,feature_request,neutral
-review,"This platform has saved our ops team a surprising amount of time.",2026-06-07T09:46:33,praise,positive
-support_ticket,"The form resets before I finish editing. Lost my work twice.",2026-06-07T18:15:24,bug,negative
-survey,"Some labels could be clearer. I had to guess what one option meant.",2026-06-08T12:37:52,usability,neutral
-review,"Pricing feels fair considering how much we use it.",2026-06-08T20:48:18,pricing,positive
-support_ticket,"Support replied quickly but the fix didn't solve the issue yet.",2026-06-09T08:54:49,customer_support,neutral
-support_ticket,"Import keeps failing around halfway through. no idea why tbh.",2026-06-09T16:29:14,bug,negative
-review,"The onboarding checklist was genuinely helpful for our admins.",2026-06-10T10:13:25,onboarding,positive
-survey,"Would be nice if archived items were easier to find later.",2026-06-10T18:07:33,feature_request,neutral
-review,"Everything feels polished. Small details make a difference.",2026-06-11T11:55:01,praise,positive
-support_ticket,"Loading dashboards is painfully slow this afternoon.",2026-06-11T19:42:20,performance,negative
-survey,"Not sure this fits any category but reports could be organized better.",2026-06-12T09:18:36,other,neutral
-support_ticket,"The save button sometimes does nothing until I refresh.",2026-06-12T15:51:02,bug,negative
-review,"Your team handled our migration smoothly. Thanks again.",2026-06-13T08:43:11,praise,positive
-survey,"Can we choose different default views per department?",2026-06-13T17:24:58,feature_request,neutral
-support_ticket,"Our bill includes seats we thought were removed.",2026-06-14T10:31:40,pricing,negative
-review,"Support stayed patient even with all our questions.",2026-06-14T18:44:07,customer_support,positive
-support_ticket,"Getting started docs missed one important step. We figured it out eventually.",2026-06-15T09:06:16,onboarding,negative
-support_ticket,"Edits disappear randomly after switching tabs. super annoying.",2026-06-15T16:39:43,bug,negative
-review,"The app feels faster than it did a month ago.",2026-06-16T11:14:52,performance,positive
-survey,"I'd love built-in approval workflows instead of using another tool.",2026-06-16T20:27:59,feature_request,neutral
-review,"Great experience so far. Hardly any complaints from our staff.",2026-06-17T09:57:13,praise,positive
-support_ticket,"Menus overlap on my laptop screen and hide important options.",2026-06-17T15:12:47,usability,negative
-support_ticket,"We hit another unexpected error while generating exports.",2026-06-18T08:38:29,bug,negative
-survey,"The interface is okay but finding advanced settings takes extra clicks.",2026-06-18T17:33:51,usability,neutral
-review,"Happy with the value overall. It's paying for itself.",2026-06-19T10:49:20,praise,positive
-support_ticket,"Large workspaces take ages to open this week.",2026-06-19T19:08:54,performance,negative
-survey,"Please add dark mode scheduling instead of switching manually.",2026-06-20T08:25:14,feature_request,neutral
-support_ticket,"I opened a case yesterday and still haven't heard back.",2026-06-20T16:17:42,customer_support,negative
-support_ticket,"The app crashed right after I uploaded a file.",2026-06-21T09:12:33,bug,negative
-review,"New hire setup only took about thirty minutes. Nice!",2026-06-21T18:46:18,onboarding,positive
-survey,"No strong opinion. It works well enough for our needs.",2026-06-22T11:34:05,other,neutral
-support_ticket,"Search results are missing recent items after sync.",2026-06-22T20:05:37,bug,negative
-review,"Everything has been reliable for weeks now.",2026-06-23T09:27:49,praise,positive
-survey,"Bulk editing would save us hours every month.",2026-06-23T17:58:23,feature_request,neutral
-support_ticket,"We're reconsidering renewal because the price increase is tough.",2026-06-24T10:18:42,pricing,negative
-review,"Support agent owned the issue from start to finish.",2026-06-24T18:41:29,customer_support,positive
-support_ticket,"The welcome flow felt a little rushed for first-time users.",2026-06-25T08:56:16,onboarding,neutral
-support_ticket,"Random timeout while updating records again.",2026-06-25T16:24:38,bug,negative
-review,"Response times have noticeably improved. Keep it up.",2026-06-26T11:11:52,performance,positive
-survey,"Please let admins create reusable templates.",2026-06-26T19:36:07,feature_request,neutral
-review,"The product just makes our daily routine easier.",2026-06-27T09:45:40,praise,positive
-support_ticket,"Dropdown selections don't always stick after saving.",2026-06-27T17:20:14,bug,negative
-survey,"I still can't tell which tab I'm supposed to start from.",2026-06-28T10:33:51,usability,negative
-review,"The platform has been dependable across our whole team.",2026-06-28T18:12:43,praise,positive
-support_ticket,"Reports spin for almost a minute before opening.",2026-06-29T08:41:19,performance,negative
-survey,"Could we get optional reminders before deadlines?",2026-06-29T16:58:35,feature_request,neutral
-support_ticket,"Billing is a bit confusing because discounts aren't obvious.",2026-06-30T11:22:08,pricing,negative
-review,"Support explained the workaround clearly while engineering investigated.",2026-06-30T19:04:12,customer_support,positive
-support_ticket,"The setup wizard skipped one screen on my account.",2026-07-01T09:17:47,onboarding,negative
-support_ticket,"Keeps logging me out randomly. pls fix.",2026-07-01T17:49:20,bug,negative
-review,"Everything feels more responsive after the last release.",2026-07-02T10:28:16,performance,positive
-survey,"I'd like custom branding on exported files.",2026-07-02T18:37:55,feature_request,neutral
-review,"Our managers actually enjoy using it, which is rare.",2026-07-03T09:58:43,praise,positive
-support_ticket,"The side panel covers important buttons on smaller screens.",2026-07-03T16:40:29,usability,negative
-support_ticket,"Another sync issue popped up overnight.",2026-07-04T08:51:37,bug,negative
-survey,"Overall okay. Maybe improve organization of settings pages.",2026-07-04T17:15:08,other,neutral
-review,"Great product. We recommend it internally all the time.",2026-07-05T10:12:59,praise,positive
-support_ticket,"Search is noticeably slower when filters are enabled.",2026-07-05T18:42:36,performance,negative
-survey,"Please allow multiple approvers on one request.",2026-07-06T09:35:18,feature_request,neutral
-support_ticket,"We need a clearer explanation of enterprise pricing tiers.",2026-07-06T16:57:21,pricing,neutral
-review,"The help desk team was kind and responsive.",2026-07-07T11:08:54,customer_support,positive
-support_ticket,"First impressions weren't great because I couldn't find the tutorial.",2026-07-07T19:19:44,onboarding,negative
-support_ticket,"The page throws an error every few edits.",2026-07-08T08:43:27,bug,negative
-review,"Really appreciate the consistent updates from your team.",2026-07-08T17:26:13,praise,positive
-survey,"Folders for saved searches would be useful.",2026-07-09T09:48:56,feature_request,neutral
-support_ticket,"The app hangs during uploads bigger than usual.",2026-07-09T18:04:09,performance,negative
-review,"Simple interface and very little training needed.",2026-07-10T10:25:31,praise,positive
-support_ticket,"Some icons are confusing without hovering over them.",2026-07-10T16:41:22,usability,neutral
-support_ticket,"Changes didn't save again after editing permissions.",2026-07-11T08:59:43,bug,negative
-survey,"Wish there was an API endpoint for this workflow.",2026-07-11T17:14:55,feature_request,neutral
-review,"Worth the subscription for our team.",2026-07-12T11:36:47,praise,positive
-support_ticket,"The latest invoice arrived later than expected.",2026-07-12T19:20:38,pricing,neutral
-review,"Support checked back a few days later which was nice.",2026-07-13T09:53:17,customer_support,positive
-support_ticket,"The initial permissions setup was harder than expected.",2026-07-13T17:37:41,onboarding,negative
-support_ticket,"Export failed with no explanation at all.",2026-07-14T10:06:14,bug,negative
-review,"Fast enough for daily work even with many users online.",2026-07-14T18:55:22,performance,positive
-survey,"Please add conditional automation rules.",2026-07-15T08:44:29,feature_request,neutral
-review,"Everything has been running smoothly across departments.",2026-07-15T17:08:36,praise,positive
-support_ticket,"Buttons shift around after resizing the browser.",2026-07-16T09:15:48,usability,negative
-support_ticket,"Seeing duplicate entries after syncing records.",2026-07-16T16:59:57,bug,negative
-review,"We're genuinely happy with the reliability.",2026-07-17T10:22:41,praise,positive
-survey,"Could we customize dashboard widgets more freely?",2026-07-17T18:12:03,feature_request,neutral
-support_ticket,"Performance drops every afternoon for some reason.",2026-07-18T08:50:54,performance,negative
-review,"The pricing is reasonable for our current size.",2026-07-18T16:46:30,pricing,positive
-support_ticket,"I had to explain the same problem twice before it was understood.",2026-07-19T11:18:27,customer_support,negative
-support_ticket,"Tiny typo maybe but the getting started guide links to the wrong page.",2026-07-19T19:05:49,onboarding,neutral
-support_ticket,"Attachments disappear after upload completes.",2026-07-20T09:24:16,bug,negative
-review,"One of the best SaaS purchases we've made this year.",2026-07-20T17:57:58,praise,positive
-survey,"Nothing special. Just continuing to use it as expected.",2026-07-21T10:11:39,other,neutral
-support_ticket,"Still getting occasional crashes when editing shared items.",2026-07-21T18:33:42,bug,negative
-review,"The recent fixes made a noticeable difference for us.",2026-06-06T13:12:04,praise,positive
-support_ticket,"Every now and then the screen goes blank after clicking save.",2026-06-08T07:42:17,bug,negative
-survey,"Please support automatic archive rules.",2026-06-11T14:33:29,feature_request,neutral
-review,"Very smooth experience from week one.",2026-06-18T12:48:56,praise,positive
-support_ticket,"Scrolling gets choppy in larger lists.",2026-06-27T15:54:40,performance,negative
-review,"We rarely need to contact support because things just work.",2026-07-02T12:07:55,praise,positive
-support_ticket,"Notifications sometimes arrive hours late.",2026-07-05T13:18:26,bug,negative
-survey,"I'd use it more if filters could be shared.",2026-07-08T14:24:10,feature_request,neutral
-review,"The overall design feels thoughtful.",2026-07-10T12:16:39,praise,positive
-support_ticket,"Clicking back occasionally loses unsaved edits.",2026-07-12T15:37:51,bug,negative
-review,"Our team adopted it faster than expected.",2026-05-27T12:08:43,onboarding,positive
-support_ticket,"Not loving the latest pricing update honestly.",2026-05-31T08:44:52,pricing,negative
-survey,"Can you add role-based homepage layouts?",2026-06-02T13:21:18,feature_request,neutral
-support_ticket,"The app feels laggy after staying open all day.",2026-06-07T14:18:49,performance,negative
-review,"Support solved our issue before the end of the day.",2026-06-12T11:46:05,customer_support,positive
-support_ticket,"Checkboxes untick themselves sometimes. weird.",2026-06-16T09:31:42,bug,negative
-review,"Really clean product and easy to trust.",2026-06-20T13:09:57,praise,positive
-survey,"A compact table view would help power users.",2026-06-25T18:44:11,feature_request,neutral
-support_ticket,"The navigation isn't terrible but it could be simpler.",2026-06-30T09:55:32,usability,neutral
-review,"Excellent reliability over the past month.",2026-07-04T12:11:18,praise,positive
-support_ticket,"Unexpected error popped up while renaming a workspace.",2026-07-06T18:28:07,bug,negative
-survey,"Would appreciate optional weekly summaries by email.",2026-07-09T11:17:54,feature_request,neutral
-review,"The platform keeps improving release after release.",2026-07-11T09:43:15,praise,positive
-support_ticket,"Opening project history is slower than before.",2026-07-14T14:26:43,performance,negative
-review,"Customer service was professional from start to finish.",2026-07-17T12:35:06,customer_support,positive
-support_ticket,"Inviting teammates wasn't very intuitive at first.",2026-07-18T19:16:28,onboarding,neutral
-support_ticket,"We found another issue where comments vanish after refresh.",2026-07-20T13:42:51,bug,negative
-review,"Happy customer here. Keep building like this.",2026-07-21T15:27:34,praise,positive
-support_ticket,"The cursor jumps while typing in long notes.",2026-05-30T12:55:48,bug,negative
-review,"Everything feels dependable and that's what we wanted.",2026-06-14T13:36:22,praise,positive
-support_ticket,"I wish support hours were a little longer for our timezone.",2026-06-22T14:57:03,customer_support,neutral
-survey,"Please add saved filter presets for each user.",2026-07-03T11:04:46,feature_request,neutral
-support_ticket,"Sometimes charts don't render until I reload.",2026-07-15T13:49:27,bug,negative
-review,"It's refreshing to use software that doesn't fight us every day.",2026-07-19T10:58:12,praise,positive
-support_ticket,"The application slows down noticeably during imports.",2026-07-20T18:21:40,performance,negative
-review,"Solid experience overall and our stakeholders are happy.",2026-07-21T21:11:05,praise,positive
+text,created_at
+The workflow mostly fits how our team works but I still click around more than I expect. A few shortcuts would help.,2026-05-26T09:14:22
+Really impressed with how stable everything has been lately. It quietly gets the job done.,2026-05-26T14:47:51
+Pages keep freezing after I save changes. Had to refresh twice this morning.,2026-05-27T08:19:33
+Would love a way to pin frequently used dashboards instead of searching every time.,2026-05-27T16:52:40
+The response time feels snappy even with larger projects. Nice improvement.,2026-05-28T10:21:09
+Our invoice total doesn't match what we expected this month. Can someone explain the extra charge?,2026-05-28T18:37:55
+Setup was easier than I feared. New teammates were productive within a day.,2026-05-29T11:02:47
+Overall it's fine. Nothing major stands out either way.,2026-05-29T20:11:31
+After today's update some fields stop saving correctly. It's slowing everyone down.,2026-05-30T09:43:58
+Customer support actually followed up without us chasing them. Appreciate that.,2026-05-30T15:17:12
+I'd like custom notification rules for different projects. Right now it's all or nothing.,2026-05-31T13:08:44
+Honestly one of the smoother tools we've rolled out this year.,2026-05-31T19:24:07
+The app takes forever to load large reports now. Last week it was much faster.,2026-06-01T08:58:13
+Navigation makes sense after using it awhile but new users get lost at first.,2026-06-01T17:06:22
+I'm seeing random error messages when editing records. Didn't happen before.,2026-06-02T10:15:19
+Love the clean layout. It keeps distractions to a minimum.,2026-06-02T18:33:28
+Could you add scheduled exports every Friday? That would save manual work.,2026-06-03T09:27:35
+The renewal cost jumped more than we budgeted for. We need clarification.,2026-06-03T16:54:42
+Support was friendly and explained everything clearly.,2026-06-04T11:12:56
+First login was confusing because I wasn't sure what to configure first.,2026-06-04T19:41:07
+Nothing urgent to report. Just sharing general feedback after a few weeks.,2026-06-05T08:31:26
+Search stopped returning expected results after lunch. Pretty frustrating.,2026-06-05T14:23:41
+Performance has been consistently solid during our busiest hours.,2026-06-06T10:09:58
+I'd really like keyboard shortcuts for repetitive actions.,2026-06-06T17:58:10
+This platform has saved our ops team a surprising amount of time.,2026-06-07T09:46:33
+The form resets before I finish editing. Lost my work twice.,2026-06-07T18:15:24
+Some labels could be clearer. I had to guess what one option meant.,2026-06-08T12:37:52
+Pricing feels fair considering how much we use it.,2026-06-08T20:48:18
+Support replied quickly but the fix didn't solve the issue yet.,2026-06-09T08:54:49
+Import keeps failing around halfway through. no idea why tbh.,2026-06-09T16:29:14
+The onboarding checklist was genuinely helpful for our admins.,2026-06-10T10:13:25
+Would be nice if archived items were easier to find later.,2026-06-10T18:07:33
+Everything feels polished. Small details make a difference.,2026-06-11T11:55:01
+Loading dashboards is painfully slow this afternoon.,2026-06-11T19:42:20
+Not sure this fits any category but reports could be organized better.,2026-06-12T09:18:36
+The save button sometimes does nothing until I refresh.,2026-06-12T15:51:02
+Your team handled our migration smoothly. Thanks again.,2026-06-13T08:43:11
+Can we choose different default views per department?,2026-06-13T17:24:58
+Our bill includes seats we thought were removed.,2026-06-14T10:31:40
+Support stayed patient even with all our questions.,2026-06-14T18:44:07
+Getting started docs missed one important step. We figured it out eventually.,2026-06-15T09:06:16
+Edits disappear randomly after switching tabs. super annoying.,2026-06-15T16:39:43
+The app feels faster than it did a month ago.,2026-06-16T11:14:52
+I'd love built-in approval workflows instead of using another tool.,2026-06-16T20:27:59
+Great experience so far. Hardly any complaints from our staff.,2026-06-17T09:57:13
+Menus overlap on my laptop screen and hide important options.,2026-06-17T15:12:47
+We hit another unexpected error while generating exports.,2026-06-18T08:38:29
+The interface is okay but finding advanced settings takes extra clicks.,2026-06-18T17:33:51
+Happy with the value overall. It's paying for itself.,2026-06-19T10:49:20
+Large workspaces take ages to open this week.,2026-06-19T19:08:54
+Please add dark mode scheduling instead of switching manually.,2026-06-20T08:25:14
+I opened a case yesterday and still haven't heard back.,2026-06-20T16:17:42
+The app crashed right after I uploaded a file.,2026-06-21T09:12:33
+New hire setup only took about thirty minutes. Nice!,2026-06-21T18:46:18
+No strong opinion. It works well enough for our needs.,2026-06-22T11:34:05
+Search results are missing recent items after sync.,2026-06-22T20:05:37
+Everything has been reliable for weeks now.,2026-06-23T09:27:49
+Bulk editing would save us hours every month.,2026-06-23T17:58:23
+We're reconsidering renewal because the price increase is tough.,2026-06-24T10:18:42
+Support agent owned the issue from start to finish.,2026-06-24T18:41:29
+The welcome flow felt a little rushed for first-time users.,2026-06-25T08:56:16
+Random timeout while updating records again.,2026-06-25T16:24:38
+Response times have noticeably improved. Keep it up.,2026-06-26T11:11:52
+Please let admins create reusable templates.,2026-06-26T19:36:07
+The product just makes our daily routine easier.,2026-06-27T09:45:40
+Dropdown selections don't always stick after saving.,2026-06-27T17:20:14
+I still can't tell which tab I'm supposed to start from.,2026-06-28T10:33:51
+The platform has been dependable across our whole team.,2026-06-28T18:12:43
+Reports spin for almost a minute before opening.,2026-06-29T08:41:19
+Could we get optional reminders before deadlines?,2026-06-29T16:58:35
+Billing is a bit confusing because discounts aren't obvious.,2026-06-30T11:22:08
+Support explained the workaround clearly while engineering investigated.,2026-06-30T19:04:12
+The setup wizard skipped one screen on my account.,2026-07-01T09:17:47
+Keeps logging me out randomly. pls fix.,2026-07-01T17:49:20
+Everything feels more responsive after the last release.,2026-07-02T10:28:16
+I'd like custom branding on exported files.,2026-07-02T18:37:55
+"Our managers actually enjoy using it, which is rare.",2026-07-03T09:58:43
+The side panel covers important buttons on smaller screens.,2026-07-03T16:40:29
+Another sync issue popped up overnight.,2026-07-04T08:51:37
+Overall okay. Maybe improve organization of settings pages.,2026-07-04T17:15:08
+Great product. We recommend it internally all the time.,2026-07-05T10:12:59
+Search is noticeably slower when filters are enabled.,2026-07-05T18:42:36
+Please allow multiple approvers on one request.,2026-07-06T09:35:18
+We need a clearer explanation of enterprise pricing tiers.,2026-07-06T16:57:21
+The help desk team was kind and responsive.,2026-07-07T11:08:54
+First impressions weren't great because I couldn't find the tutorial.,2026-07-07T19:19:44
+The page throws an error every few edits.,2026-07-08T08:43:27
+Really appreciate the consistent updates from your team.,2026-07-08T17:26:13
+Folders for saved searches would be useful.,2026-07-09T09:48:56
+The app hangs during uploads bigger than usual.,2026-07-09T18:04:09
+Simple interface and very little training needed.,2026-07-10T10:25:31
+Some icons are confusing without hovering over them.,2026-07-10T16:41:22
+Changes didn't save again after editing permissions.,2026-07-11T08:59:43
+Wish there was an API endpoint for this workflow.,2026-07-11T17:14:55
+Worth the subscription for our team.,2026-07-12T11:36:47
+The latest invoice arrived later than expected.,2026-07-12T19:20:38
+Support checked back a few days later which was nice.,2026-07-13T09:53:17
+The initial permissions setup was harder than expected.,2026-07-13T17:37:41
+Export failed with no explanation at all.,2026-07-14T10:06:14
+Fast enough for daily work even with many users online.,2026-07-14T18:55:22
+Please add conditional automation rules.,2026-07-15T08:44:29
+Everything has been running smoothly across departments.,2026-07-15T17:08:36
+Buttons shift around after resizing the browser.,2026-07-16T09:15:48
+Seeing duplicate entries after syncing records.,2026-07-16T16:59:57
+We're genuinely happy with the reliability.,2026-07-17T10:22:41
+Could we customize dashboard widgets more freely?,2026-07-17T18:12:03
+Performance drops every afternoon for some reason.,2026-07-18T08:50:54
+The pricing is reasonable for our current size.,2026-07-18T16:46:30
+I had to explain the same problem twice before it was understood.,2026-07-19T11:18:27
+Tiny typo maybe but the getting started guide links to the wrong page.,2026-07-19T19:05:49
+Attachments disappear after upload completes.,2026-07-20T09:24:16
+One of the best SaaS purchases we've made this year.,2026-07-20T17:57:58
+Nothing special. Just continuing to use it as expected.,2026-07-21T10:11:39
+Still getting occasional crashes when editing shared items.,2026-07-21T18:33:42
+The recent fixes made a noticeable difference for us.,2026-06-06T13:12:04
+Every now and then the screen goes blank after clicking save.,2026-06-08T07:42:17
+Please support automatic archive rules.,2026-06-11T14:33:29
+Very smooth experience from week one.,2026-06-18T12:48:56
+Scrolling gets choppy in larger lists.,2026-06-27T15:54:40
+We rarely need to contact support because things just work.,2026-07-02T12:07:55
+Notifications sometimes arrive hours late.,2026-07-05T13:18:26
+I'd use it more if filters could be shared.,2026-07-08T14:24:10
+The overall design feels thoughtful.,2026-07-10T12:16:39
+Clicking back occasionally loses unsaved edits.,2026-07-12T15:37:51
+Our team adopted it faster than expected.,2026-05-27T12:08:43
+Not loving the latest pricing update honestly.,2026-05-31T08:44:52
+Can you add role-based homepage layouts?,2026-06-02T13:21:18
+The app feels laggy after staying open all day.,2026-06-07T14:18:49
+Support solved our issue before the end of the day.,2026-06-12T11:46:05
+Checkboxes untick themselves sometimes. weird.,2026-06-16T09:31:42
+Really clean product and easy to trust.,2026-06-20T13:09:57
+A compact table view would help power users.,2026-06-25T18:44:11
+The navigation isn't terrible but it could be simpler.,2026-06-30T09:55:32
+Excellent reliability over the past month.,2026-07-04T12:11:18
+Unexpected error popped up while renaming a workspace.,2026-07-06T18:28:07
+Would appreciate optional weekly summaries by email.,2026-07-09T11:17:54
+The platform keeps improving release after release.,2026-07-11T09:43:15
+Opening project history is slower than before.,2026-07-14T14:26:43
+Customer service was professional from start to finish.,2026-07-17T12:35:06
+Inviting teammates wasn't very intuitive at first.,2026-07-18T19:16:28
+We found another issue where comments vanish after refresh.,2026-07-20T13:42:51
+Happy customer here. Keep building like this.,2026-07-21T15:27:34
+The cursor jumps while typing in long notes.,2026-05-30T12:55:48
+Everything feels dependable and that's what we wanted.,2026-06-14T13:36:22
+I wish support hours were a little longer for our timezone.,2026-06-22T14:57:03
+Please add saved filter presets for each user.,2026-07-03T11:04:46
+Sometimes charts don't render until I reload.,2026-07-15T13:49:27
+It's refreshing to use software that doesn't fight us every day.,2026-07-19T10:58:12
+The application slows down noticeably during imports.,2026-07-20T18:21:40
+Solid experience overall and our stakeholders are happy.,2026-07-21T21:11:05

@@ -1,5 +1,6 @@
-"""GET-only feedback endpoints: list/filter processed records."""
+"""Feedback endpoints: submit new feedback and list/filter processed records."""
 
+from datetime import datetime, timezone
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
@@ -9,9 +10,29 @@ from sqlalchemy.orm import Session
 from src.constants import Category, Sentiment
 from src.database.database import get_db
 from src.models.feedback import Feedback
-from src.schemas.feedback import FeedbackOut
+from src.schemas.feedback import FeedbackCreate, FeedbackOut
+from src.services.pipeline import process_feedback_item
 
 router = APIRouter(prefix="/feedback", tags=["feedback"])
+
+
+@router.post("", response_model=FeedbackOut, status_code=201)
+def create_feedback(
+    payload: FeedbackCreate,
+    db: Session = Depends(get_db),
+):
+    """Accept new feedback, classify + theme it now, then store it."""
+    item = Feedback(
+        text=payload.text,
+        created_at=datetime.now(timezone.utc),
+    )
+    db.add(item)
+    db.commit()
+    db.refresh(item)
+
+    process_feedback_item(db, item)
+    db.refresh(item)
+    return item
 
 
 @router.get("", response_model=list[FeedbackOut])

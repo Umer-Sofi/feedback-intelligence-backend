@@ -1,8 +1,10 @@
-"""Load the processed feedback dataset into Postgres (+ pgvector).
+"""Load the raw feedback dataset into Postgres (+ pgvector).
 
-Reads data/feedback.csv, inserts each row as an UNPROCESSED feedback record,
-and (unless --skip-embeddings) stores its embedding vector on the row via
-pgvector. This is the ONLY ingestion path — never an API call. Run manually
+Reads data/feedback.csv (raw feedback text + timestamp only), inserts each
+row as an UNPROCESSED feedback record, and (unless --skip-embeddings) embeds
+its text into feedback_chunks via pgvector. Classification (category,
+sentiment, themes) is done later by the pipeline — not here. This is the bulk
+ingestion path; single items can also arrive via POST /feedback. Run manually
 or via cron.
 """
 
@@ -32,7 +34,6 @@ def load_dataset(csv_path: Path, skip_embeddings: bool = False) -> int:
     try:
         for _, row in df.iterrows():
             item = Feedback(
-                source=str(row["source"]),
                 text=str(row["text"]),
                 created_at=datetime.fromisoformat(str(row["created_at"])),
                 processed=False,

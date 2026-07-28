@@ -15,6 +15,12 @@ from src.constants import (
 )
 
 
+class FeedbackCreate(BaseModel):
+    """Feedback submitted through the API by a user."""
+
+    text: str = Field(min_length=1, max_length=5000)
+
+
 class ClassificationResult(BaseModel):
     """Validated structured output from the classifier LLM call."""
 
@@ -27,12 +33,11 @@ class ClassificationResult(BaseModel):
 
 
 class FeedbackOut(BaseModel):
-    """A processed feedback record as returned by the GET API."""
+    """A feedback record as returned by the API."""
 
     model_config = ConfigDict(from_attributes=True)
 
     id: int
-    source: str
     text: str
     created_at: datetime
     processed: bool

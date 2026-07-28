@@ -5,9 +5,6 @@ from sqlalchemy.orm import Session
 
 from src.models.feedback import Feedback
 from src.services import vector_store
-from src.utils.logger import get_logger
-
-logger = get_logger(__name__)
 
 
 def retrieve_relevant(
