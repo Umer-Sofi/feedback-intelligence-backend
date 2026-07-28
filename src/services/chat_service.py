@@ -11,9 +11,7 @@ from src.prompts.query_reformulation import build_reformulation_messages
 from src.schemas.chat import ChatResponse, SourceOut
 from src.services import retrieval
 from src.services.openai_client import chat
-from src.utils.logger import get_logger
 
-logger = get_logger(__name__)
 settings = get_settings()
 
 
@@ -43,6 +41,11 @@ def answer_question(
     """Answer a question with RAG and persist the conversation turn."""
     session = _get_or_create_session(db, session_id)
     history = _history(session)
+
+    # Give a brand-new session a readable title from its first question,
+    # so the sessions list shows the topic instead of "Session 3".
+    if session.title is None:
+        session.title = question[:60]
 
     # 1. Rewrite a follow-up into a standalone retrieval query.
     if history:

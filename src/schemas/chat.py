@@ -39,6 +39,16 @@ class ChatMessageOut(BaseModel):
     created_at: datetime
 
 
+class ChatSessionSummary(BaseModel):
+    """A chat session without its messages (for the sessions list)."""
+
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    title: Optional[str] = None
+    created_at: datetime
+
+
 class ChatSessionOut(BaseModel):
     """A chat session with its full message history."""
 
