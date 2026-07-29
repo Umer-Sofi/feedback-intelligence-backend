@@ -1,5 +1,8 @@
 """GET analytics dashboard + weekly narrative summary."""
 
+from datetime import date
+from typing import Optional
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
@@ -16,6 +19,18 @@ def overview(db: Session = Depends(get_db)) -> dict:
 
 
 @router.get("/summary")
-def weekly_summary(db: Session = Depends(get_db)) -> dict:
-    """Return the RAG-grounded weekly narrative summary."""
-    return {"summary": summarizer.generate_weekly_summary(db)}
+def weekly_summary(
+    start: Optional[date] = None,
+    end: Optional[date] = None,
+    db: Session = Depends(get_db),
+) -> dict:
+    """Return the RAG-grounded summary for a date window.
+
+    `start`/`end` (YYYY-MM-DD) pick the window; omit both for the last
+    7 days.
+    """
+    return {
+        "summary": summarizer.generate_weekly_summary(
+            db, start=start, end=end
+        )
+    }
