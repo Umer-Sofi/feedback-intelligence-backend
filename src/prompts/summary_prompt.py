@@ -11,9 +11,9 @@ def build_summary_messages(
     period_line = ""
     if period:
         period_line = (
-            f"This report covers {period['from']} to {period['to']} "
-            f"({period['count']} items in that period). "
-            "Begin by stating this date range and the item count.\n\n"
+            f"This report covers feedback starting from {period['from']} "
+            f"({period['count']} items). Begin by stating this start date "
+            "and the item count. Do NOT state or infer an end date.\n\n"
         )
     system = (
         "You are an analyst writing a weekly customer-feedback summary for "

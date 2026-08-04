@@ -32,42 +32,33 @@ def _to_dt(d: date) -> datetime:
 
 
 def generate_weekly_summary(
-    db: Session,
-    start: Optional[date] = None,
-    end: Optional[date] = None,
-    days: int = 7,
+    db: Session, start: Optional[date] = None, days: int = 7
 ) -> str:
-    """Produce a narrative summary for a date window (default: last 7 days).
+    """Produce a narrative summary for one week.
 
-    - start & end -> that inclusive date range
-    - start only  -> the `days`-day week beginning on start
-    - end only    -> the `days`-day week ending on end
-    - neither     -> the rolling last `days` days
+    `start` -> the `days`-day week beginning on that date;
+    omitted  -> the rolling last `days` days.
 
-    Headline stats are scoped to the window; theme trends use a rolling
-    window ending at the window's end; the date range is shown in the text.
+    Headline stats are scoped to the week; theme trends use a rolling
+    window ending at the week's end; only the start date is shown.
     """
-    if start and end:
-        since = _to_dt(start)
-        until = _to_dt(end) + timedelta(days=1)  # make end date inclusive
-        from_d, to_d = start.isoformat(), end.isoformat()
-    elif start:
+    if start:
         since = _to_dt(start)
         until = since + timedelta(days=days)
-        from_d = start.isoformat()
-        to_d = (until - timedelta(days=1)).date().isoformat()
-    elif end:
-        until = _to_dt(end) + timedelta(days=1)
-        since = until - timedelta(days=days)
-        from_d = since.date().isoformat()
-        to_d = end.isoformat()
     else:
         until = datetime.now(timezone.utc)
         since = until - timedelta(days=days)
-        from_d = since.date().isoformat()
-        to_d = until.date().isoformat()
+    from_d = since.date().isoformat()
 
     stats = analytics.overview(db, since=since, until=until)
+
+    # No feedback in the window: say so plainly instead of grounding on
+    # quotes from other weeks (retrieval isn't date-scoped). Skips the LLM.
+    if stats["total_processed"] == 0:
+        return (
+            f"No customer feedback was received for the week "
+            f"starting {from_d}."
+        )
 
     # Keep only recurring themes (drop one-off singletons) and cap the count,
     # so the prompt highlights real trends instead of a wall of noise.
@@ -86,7 +77,6 @@ def generate_weekly_summary(
 
     period = {
         "from": from_d,
-        "to": to_d,
         "count": stats["total_processed"],
     }
     messages = build_summary_messages(stats, quotes, period)

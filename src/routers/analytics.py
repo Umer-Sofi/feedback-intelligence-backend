@@ -21,16 +21,10 @@ def overview(db: Session = Depends(get_db)) -> dict:
 @router.get("/summary")
 def weekly_summary(
     start: Optional[date] = None,
-    end: Optional[date] = None,
     db: Session = Depends(get_db),
 ) -> dict:
-    """Return the RAG-grounded summary for a date window.
+    """Return the RAG-grounded summary for one week.
 
-    `start`/`end` (YYYY-MM-DD) pick the window; omit both for the last
-    7 days.
+    `start` (YYYY-MM-DD) picks the week; omit it for the last 7 days.
     """
-    return {
-        "summary": summarizer.generate_weekly_summary(
-            db, start=start, end=end
-        )
-    }
+    return {"summary": summarizer.generate_weekly_summary(db, start=start)}
