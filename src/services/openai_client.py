@@ -27,12 +27,21 @@ def chat(
     messages: list[dict],
     model: Optional[str] = None,
     temperature: float = 0.0,
+    max_tokens: Optional[int] = None,
 ) -> str:
-    """Return the assistant's plain-text reply for a chat completion."""
+    """Return the assistant's plain-text reply for a chat completion.
+
+    `max_tokens` caps the reply length when set (a hard stop); left as None,
+    the reply is bounded only by the model's own limit.
+    """
+    kwargs = {}
+    if max_tokens is not None:
+        kwargs["max_tokens"] = max_tokens
     response = _client.chat.completions.create(
         model=model or settings.openai_chat_model,
         messages=messages,
         temperature=temperature,
+        **kwargs,
     )
     return response.choices[0].message.content or ""
 
