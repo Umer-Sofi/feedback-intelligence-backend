@@ -25,8 +25,3 @@ def classify(text: str) -> ClassificationResult:
         result.confidence,
     )
     return result
-
-
-def is_low_confidence(result: ClassificationResult) -> bool:
-    """True if the result should be flagged for manual review."""
-    return result.confidence < settings.low_confidence_threshold

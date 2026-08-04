@@ -24,14 +24,24 @@ def category_counts(
     since: Optional[datetime] = None,
     until: Optional[datetime] = None,
 ) -> dict:
-    """Return {category: count} over processed feedback in the window."""
+    """Return {category: count} over processed feedback in the window.
+
+    A feedback's category may be several comma-separated values (multi-topic),
+    so each one is counted individually.
+    """
     stmt = _in_window(
-        select(Feedback.category, func.count())
-        .where(Feedback.processed.is_(True)),
+        select(Feedback.category).where(Feedback.processed.is_(True)),
         since, until,
     )
-    rows = db.execute(stmt.group_by(Feedback.category)).all()
-    return {category: count for category, count in rows if category}
+    counts: dict = {}
+    for value in db.execute(stmt).scalars():
+        if not value:
+            continue
+        for category in value.split(","):
+            category = category.strip()
+            if category:
+                counts[category] = counts.get(category, 0) + 1
+    return counts
 
 
 def sentiment_distribution(
@@ -55,21 +65,6 @@ def sentiment_distribution(
     )
     average = db.execute(avg_stmt).scalar()
     return {"counts": counts, "average_score": average}
-
-
-def flagged_count(
-    db: Session,
-    since: Optional[datetime] = None,
-    until: Optional[datetime] = None,
-) -> int:
-    """Number of items flagged for manual review in the window."""
-    stmt = _in_window(
-        select(func.count())
-        .select_from(Feedback)
-        .where(Feedback.flagged_for_review.is_(True)),
-        since, until,
-    )
-    return db.execute(stmt).scalar_one()
 
 
 def theme_trends(
@@ -128,6 +123,5 @@ def overview(
         "total_processed": total,
         "categories": category_counts(db, since, until),
         "sentiment": sentiment_distribution(db, since, until),
-        "flagged_for_review": flagged_count(db, since, until),
         "themes": theme_trends(db, until=until),
     }

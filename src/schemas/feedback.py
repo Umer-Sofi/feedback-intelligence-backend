@@ -22,9 +22,13 @@ class FeedbackCreate(BaseModel):
 
 
 class ClassificationResult(BaseModel):
-    """Validated structured output from the classifier LLM call."""
+    """Validated structured output from the classifier LLM call.
 
-    category: Category
+    `category` is a list so a single submission covering several topics can
+    carry all applicable categories (stored comma-separated).
+    """
+
+    category: list[Category] = Field(min_length=1)
     sentiment: Sentiment
     sentiment_score: float = Field(
         ge=SENTIMENT_SCORE_MIN, le=SENTIMENT_SCORE_MAX
@@ -41,11 +45,11 @@ class FeedbackOut(BaseModel):
     text: str
     created_at: datetime
     processed: bool
-    category: Optional[Category] = None
+    # Comma-separated categories (a feedback may span multiple topics).
+    category: Optional[str] = None
     sentiment: Optional[Sentiment] = None
     sentiment_score: Optional[float] = None
     confidence: Optional[float] = None
-    flagged_for_review: bool = False
     theme_id: Optional[int] = None
 
 

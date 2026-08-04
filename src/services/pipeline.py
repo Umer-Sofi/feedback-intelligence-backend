@@ -23,11 +23,10 @@ logger = get_logger(__name__)
 def process_feedback_item(db: Session, item: Feedback) -> None:
     """Classify, persist, flag, and theme a single feedback item."""
     result = classifier.classify(item.text)
-    item.category = result.category.value
+    item.category = ", ".join(c.value for c in result.category)
     item.sentiment = result.sentiment.value
     item.sentiment_score = result.sentiment_score
     item.confidence = result.confidence
-    item.flagged_for_review = classifier.is_low_confidence(result)
     item.processed = True
     db.commit()
 

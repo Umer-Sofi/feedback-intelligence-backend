@@ -30,7 +30,8 @@ def run_eval() -> dict:
     for _, row in df.iterrows():
         result = classify(str(row["text"]))
         true_cat = str(row["category"])
-        cat_ok = result.category.value == true_cat
+        predicted_cats = [c.value for c in result.category]
+        cat_ok = true_cat in predicted_cats
         sent_ok = result.sentiment.value == str(row["sentiment"])
         cat_correct += int(cat_ok)
         sent_correct += int(sent_ok)

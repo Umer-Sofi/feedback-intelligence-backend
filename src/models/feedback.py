@@ -51,13 +51,13 @@ class Feedback(Base):
 
     # Classification output — null until the pipeline processes the row.
     processed: Mapped[bool] = mapped_column(Boolean, default=False)
-    category: Mapped[Optional[str]] = mapped_column(String(50), default=None)
+    # May hold several categories, comma-separated, for multi-topic feedback.
+    category: Mapped[Optional[str]] = mapped_column(String(200), default=None)
     sentiment: Mapped[Optional[str]] = mapped_column(String(20), default=None)
     sentiment_score: Mapped[Optional[float]] = mapped_column(
         Float, default=None
     )
     confidence: Mapped[Optional[float]] = mapped_column(Float, default=None)
-    flagged_for_review: Mapped[bool] = mapped_column(Boolean, default=False)
 
     # Theme link — assigned by the theme aggregator via vector similarity.
     theme_id: Mapped[Optional[int]] = mapped_column(

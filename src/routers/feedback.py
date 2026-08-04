@@ -40,18 +40,17 @@ def list_feedback(
     db: Session = Depends(get_db),
     category: Optional[Category] = None,
     sentiment: Optional[Sentiment] = None,
-    flagged: Optional[bool] = None,
     limit: int = Query(50, ge=1, le=500),
     offset: int = Query(0, ge=0),
 ):
     """List processed feedback, optionally filtered."""
     stmt = select(Feedback).where(Feedback.processed.is_(True))
     if category is not None:
-        stmt = stmt.where(Feedback.category == category.value)
+        # category may be a comma-separated list; match if it contains the
+        # requested value (no category value is a substring of another).
+        stmt = stmt.where(Feedback.category.contains(category.value))
     if sentiment is not None:
         stmt = stmt.where(Feedback.sentiment == sentiment.value)
-    if flagged is not None:
-        stmt = stmt.where(Feedback.flagged_for_review.is_(flagged))
     stmt = (
         stmt.order_by(Feedback.created_at.desc())
         .limit(limit)

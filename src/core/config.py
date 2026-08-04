@@ -24,9 +24,6 @@ class Settings(BaseSettings):
     # Tuned for OpenAI embeddings vs theme-keyword vectors (median ~0.58).
     theme_similarity_threshold: float = 0.58
 
-    # Classifications below this confidence get flagged for review.
-    low_confidence_threshold: float = 0.6
-
     # Retry / backoff
     retry_max_attempts: int = 4
     retry_initial_wait: float = 1.0
