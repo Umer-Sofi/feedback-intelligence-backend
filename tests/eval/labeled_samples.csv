@@ -1,0 +1,51 @@
+text,category,sentiment
+Another sync issue popped up overnight.,bug,negative
+Every now and then the screen goes blank after clicking save.,bug,negative
+Seeing duplicate entries after syncing records.,bug,negative
+Still getting occasional crashes when editing shared items.,bug,negative
+Unexpected error popped up while renaming a workspace.,bug,negative
+Attachments disappear after upload completes.,bug,negative
+Search stopped returning expected results after lunch. Pretty frustrating.,bug,negative
+Search results are missing recent items after sync.,bug,negative
+Clicking back occasionally loses unsaved edits.,bug,negative
+Notifications sometimes arrive hours late.,bug,negative
+Support replied quickly but the fix didn't solve the issue yet.,customer_support,neutral
+Support stayed patient even with all our questions.,customer_support,positive
+I opened a case yesterday and still haven't heard back.,customer_support,negative
+Support solved our issue before the end of the day.,customer_support,positive
+A compact table view would help power users.,feature_request,neutral
+Please support automatic archive rules.,feature_request,neutral
+I'd really like keyboard shortcuts for repetitive actions.,feature_request,neutral
+Folders for saved searches would be useful.,feature_request,neutral
+Can you add role-based homepage layouts?,feature_request,neutral
+Could we customize dashboard widgets more freely?,feature_request,neutral
+Could we get optional reminders before deadlines?,feature_request,neutral
+Would be nice if archived items were easier to find later.,feature_request,neutral
+The onboarding checklist was genuinely helpful for our admins.,onboarding,positive
+Getting started docs missed one important step. We figured it out eventually.,onboarding,negative
+New hire setup only took about thirty minutes. Nice!,onboarding,positive
+Our team adopted it faster than expected.,onboarding,positive
+Not sure this fits any category but reports could be organized better.,other,neutral
+Nothing urgent to report. Just sharing general feedback after a few weeks.,other,neutral
+Loading dashboards is painfully slow this afternoon.,performance,negative
+Scrolling gets choppy in larger lists.,performance,negative
+Reports spin for almost a minute before opening.,performance,negative
+Performance has been consistently solid during our busiest hours.,performance,positive
+Response times have noticeably improved. Keep it up.,performance,positive
+The app hangs during uploads bigger than usual.,performance,negative
+We're genuinely happy with the reliability.,praise,positive
+We rarely need to contact support because things just work.,praise,positive
+The platform has been dependable across our whole team.,praise,positive
+The recent fixes made a noticeable difference for us.,praise,positive
+Simple interface and very little training needed.,praise,positive
+Very smooth experience from week one.,praise,positive
+Happy customer here. Keep building like this.,praise,positive
+This platform has saved our ops team a surprising amount of time.,praise,positive
+Excellent reliability over the past month.,praise,positive
+The overall design feels thoughtful.,praise,positive
+Pricing feels fair considering how much we use it.,pricing,positive
+Not loving the latest pricing update honestly.,pricing,negative
+We need a clearer explanation of enterprise pricing tiers.,pricing,neutral
+Some labels could be clearer. I had to guess what one option meant.,usability,neutral
+The navigation isn't terrible but it could be simpler.,usability,neutral
+The side panel covers important buttons on smaller screens.,usability,negative
