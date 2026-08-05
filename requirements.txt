@@ -11,6 +11,8 @@ pydantic-settings==2.3.4
 
 # LLM + embeddings
 openai==1.35.7
+# Pin httpx: openai 1.35.7 breaks on httpx >=0.28 (removed the `proxies` arg).
+httpx==0.27.0
 
 # Database driver + vector storage (Postgres + pgvector)
 psycopg[binary]==3.2.9

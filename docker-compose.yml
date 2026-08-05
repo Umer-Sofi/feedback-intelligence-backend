@@ -1,3 +1,10 @@
+# Runs the whole app: database + backend + frontend.
+#
+# The frontend lives in a sibling repo, so check both out next to each other:
+#   feedback-intelligence-backend/   (this repo, run compose from here)
+#   feedback-intelligence-frontend/
+#
+# Then:  docker compose up --build   ->  open http://localhost:3000
 services:
   db:
     image: pgvector/pgvector:pg16
@@ -10,6 +17,36 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U feedback"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  backend:
+    build: .
+    container_name: feedback_backend
+    # Load OPENAI_API_KEY (and the model names) from the local .env.
+    env_file:
+      - .env
+    environment:
+      # Inside Docker the database is reached by its service name "db",
+      # not localhost. This overrides DATABASE_URL from .env.
+      DATABASE_URL: postgresql+psycopg://feedback:feedback@db:5432/feedback
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ../frontend
+    container_name: feedback_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
 
 volumes:
   pgdata:
