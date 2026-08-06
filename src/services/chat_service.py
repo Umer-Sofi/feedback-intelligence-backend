@@ -13,6 +13,7 @@ from sqlalchemy.orm import Session
 from src.core.config import get_settings
 from src.models.chat import ChatMessage, ChatSession
 from src.models.feedback import Feedback
+from src.models.user import User
 from src.prompts.chat_answer_prompt import build_answer_messages
 from src.prompts.query_reformulation import build_reformulation_messages
 from src.schemas.chat import ChatResponse, SourceOut
@@ -38,13 +39,18 @@ _RECENT_FEEDBACK_COUNT = 5
 
 
 def _get_or_create_session(
-    db: Session, session_id: Optional[int]
+    db: Session, session_id: Optional[int], user_id: int
 ) -> ChatSession:
+    """Resume the user's own session if given, else start a new one.
+
+    A session_id that belongs to someone else is ignored (a fresh session
+    is created) so one user can never append to another's conversation.
+    """
     if session_id is not None:
         session = db.get(ChatSession, session_id)
-        if session is not None:
+        if session is not None and session.user_id == user_id:
             return session
-    session = ChatSession()
+    session = ChatSession(user_id=user_id)
     db.add(session)
     db.commit()
     db.refresh(session)
@@ -71,13 +77,19 @@ def _is_listing_query(question: str) -> bool:
     return any(keyword in q for keyword in _LISTING_KEYWORDS)
 
 
-def _recent_feedback(db: Session, n: int) -> list[dict]:
-    """The n most recently created processed feedback items, newest first."""
+def _recent_feedback(
+    db: Session, n: int, user_id: Optional[int] = None
+) -> list[dict]:
+    """The n most recent processed feedback items, newest first.
+
+    Scoped to one user when `user_id` is given (customer bot); all feedback
+    when None (admin bot).
+    """
+    stmt = select(Feedback).where(Feedback.processed.is_(True))
+    if user_id is not None:
+        stmt = stmt.where(Feedback.user_id == user_id)
     rows = db.execute(
-        select(Feedback)
-        .where(Feedback.processed.is_(True))
-        .order_by(Feedback.created_at.desc())
-        .limit(n)
+        stmt.order_by(Feedback.created_at.desc()).limit(n)
     ).scalars().all()
     return [
         {
@@ -91,10 +103,18 @@ def _recent_feedback(db: Session, n: int) -> list[dict]:
 
 
 def answer_question(
-    db: Session, question: str, session_id: Optional[int] = None
+    db: Session,
+    question: str,
+    session_id: Optional[int],
+    user: User,
 ) -> ChatResponse:
-    """Answer a question with RAG and persist the conversation turn."""
-    session = _get_or_create_session(db, session_id)
+    """Answer a question with RAG and persist the conversation turn.
+
+    An admin's bot searches all feedback; a customer's bot is scoped to
+    their own feedback via `scope_user_id`.
+    """
+    scope_user_id = None if user.role == "admin" else user.id
+    session = _get_or_create_session(db, session_id, user.id)
 
     # Give a brand-new session a readable title from its first question,
     # so the sessions list shows the topic instead of "Session 3".
@@ -106,7 +126,9 @@ def answer_question(
     if _is_listing_query(question):
         # "recent/latest/list" is about time, not meaning: return the newest
         # feedback directly (vector search can't order by recency).
-        retrieved = _recent_feedback(db, _RECENT_FEEDBACK_COUNT)
+        retrieved = _recent_feedback(
+            db, _RECENT_FEEDBACK_COUNT, scope_user_id
+        )
     else:
         # 1. Rewrite a follow-up into a standalone retrieval query.
         if history:
@@ -117,8 +139,10 @@ def answer_question(
         else:
             standalone = question
 
-        # 2. Retrieve relevant feedback (RAG).
-        retrieved = retrieval.retrieve_relevant(db, standalone, n_results=5)
+        # 2. Retrieve relevant feedback (RAG), scoped to the user if needed.
+        retrieved = retrieval.retrieve_relevant(
+            db, standalone, n_results=5, user_id=scope_user_id
+        )
 
     # 3. Generate a grounded answer.
     answer = chat(

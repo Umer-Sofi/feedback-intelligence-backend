@@ -20,6 +20,10 @@ class ChatSession(Base):
     __tablename__ = "chat_sessions"
 
     id: Mapped[int] = mapped_column(primary_key=True)
+    # Owner of this conversation (null for legacy sessions).
+    user_id: Mapped[Optional[int]] = mapped_column(
+        ForeignKey("users.id"), default=None
+    )
     title: Mapped[Optional[str]] = mapped_column(String(200), default=None)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=_utcnow

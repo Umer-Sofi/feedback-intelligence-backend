@@ -16,7 +16,7 @@ from typing import Optional
 from sqlalchemy import delete, select
 
 from src.database.database import SessionLocal
-from src.models.feedback import FeedbackChunk, Theme
+from src.models.feedback import Feedback, FeedbackChunk, Theme
 from src.services.chunking import chunk_text
 from src.services.openai_client import embed
 
@@ -91,23 +91,33 @@ def nearest_theme(text: str) -> Optional[dict]:
         db.close()
 
 
-def search_feedback(query: str, n_results: int = 5) -> list[dict]:
+def search_feedback(
+    query: str,
+    n_results: int = 5,
+    user_id: Optional[int] = None,
+) -> list[dict]:
     """Return the feedback items most similar to `query` (for RAG).
 
     Searches at the chunk level, then collapses chunks back to their parent
     feedback so each item appears once, represented by its closest passage.
+    When `user_id` is given, only that user's feedback is searched (this is
+    what scopes a customer's bot to their own feedback; admins pass None).
     """
     vector = embed([query])[0]
     db = SessionLocal()
     try:
         distance = FeedbackChunk.embedding.cosine_distance(vector)
+        stmt = select(FeedbackChunk, distance.label("distance")).where(
+            FeedbackChunk.embedding.is_not(None)
+        )
+        if user_id is not None:
+            stmt = stmt.join(
+                Feedback, Feedback.id == FeedbackChunk.feedback_id
+            ).where(Feedback.user_id == user_id)
         # Over-fetch: several top chunks may share a parent, so we need extra
         # rows to still end up with `n_results` distinct feedback items.
         rows = db.execute(
-            select(FeedbackChunk, distance.label("distance"))
-            .where(FeedbackChunk.embedding.is_not(None))
-            .order_by(distance)
-            .limit(n_results * 4)
+            stmt.order_by(distance).limit(n_results * 4)
         ).all()
         best: dict[int, dict] = {}
         for chunk, dist in rows:
