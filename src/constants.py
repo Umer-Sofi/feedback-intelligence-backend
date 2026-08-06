@@ -24,9 +24,26 @@ class Sentiment(str, Enum):
     NEGATIVE = "negative"
 
 
+class Status(str, Enum):
+    """Lifecycle of a feedback item (set by an admin)."""
+
+    OPEN = "open"
+    IN_PROGRESS = "in_progress"
+    RESOLVED = "resolved"
+
+
+class Priority(str, Enum):
+    """Triage level derived from the AI's category + sentiment."""
+
+    HIGH = "high"
+    MEDIUM = "medium"
+    LOW = "low"
+
+
 # Plain-string lists for injecting the allowed values into prompts.
 CATEGORIES: list[str] = [c.value for c in Category]
 SENTIMENTS: list[str] = [s.value for s in Sentiment]
+STATUSES: list[str] = [s.value for s in Status]
 
 # Numeric bounds referenced by schemas/validators (no magic numbers elsewhere).
 SENTIMENT_SCORE_MIN = -1.0

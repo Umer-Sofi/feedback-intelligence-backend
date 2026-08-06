@@ -59,6 +59,17 @@ class Feedback(Base):
     )
     confidence: Mapped[Optional[float]] = mapped_column(Float, default=None)
 
+    # Owner — the user who submitted it (null for legacy dataset rows).
+    user_id: Mapped[Optional[int]] = mapped_column(
+        ForeignKey("users.id"), default=None
+    )
+
+    # Workflow: lifecycle status, an optional admin reply, and an
+    # AI-derived priority (High/Medium/Low). See steps 4-5.
+    status: Mapped[str] = mapped_column(String(20), default="open")
+    admin_reply: Mapped[Optional[str]] = mapped_column(Text, default=None)
+    priority: Mapped[Optional[str]] = mapped_column(String(10), default=None)
+
     # Theme link — assigned by the theme aggregator via vector similarity.
     theme_id: Mapped[Optional[int]] = mapped_column(
         ForeignKey("themes.id"), default=None

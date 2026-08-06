@@ -12,6 +12,7 @@ from src.constants import (
     SENTIMENT_SCORE_MIN,
     Category,
     Sentiment,
+    Status,
 )
 
 
@@ -19,6 +20,13 @@ class FeedbackCreate(BaseModel):
     """Feedback submitted through the API by a user."""
 
     text: str = Field(min_length=1, max_length=5000)
+
+
+class FeedbackUpdate(BaseModel):
+    """Admin change to a feedback's workflow fields (status / reply)."""
+
+    status: Optional[Status] = None
+    admin_reply: Optional[str] = Field(default=None, max_length=2000)
 
 
 class ClassificationResult(BaseModel):
@@ -51,6 +59,11 @@ class FeedbackOut(BaseModel):
     sentiment_score: Optional[float] = None
     confidence: Optional[float] = None
     theme_id: Optional[int] = None
+    # Ownership + workflow.
+    user_id: Optional[int] = None
+    status: str = "open"
+    admin_reply: Optional[str] = None
+    priority: Optional[str] = None
 
 
 class ThemeLabel(BaseModel):
