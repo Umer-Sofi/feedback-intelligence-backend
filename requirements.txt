@@ -18,6 +18,14 @@ httpx==0.27.0
 psycopg[binary]==3.2.9
 pgvector==0.3.6
 
+# Auth: JWT + password hashing + form/email parsing
+PyJWT==2.9.0
+passlib[bcrypt]==1.7.4
+# Pin bcrypt: passlib 1.7.4 errors on bcrypt >=4.1 (removed __about__).
+bcrypt==4.0.1
+python-multipart==0.0.9
+email-validator==2.1.1
+
 # Retry / backoff
 tenacity==8.4.1
 

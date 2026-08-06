@@ -24,6 +24,11 @@ class Settings(BaseSettings):
     # Tuned for OpenAI embeddings vs theme-keyword vectors (median ~0.58).
     theme_similarity_threshold: float = 0.58
 
+    # Auth / JWT. Override jwt_secret via env in any real deployment.
+    jwt_secret: str = "dev-secret-change-me"
+    jwt_algorithm: str = "HS256"
+    access_token_expire_minutes: int = 480
+
     # Retry / backoff
     retry_max_attempts: int = 4
     retry_initial_wait: float = 1.0

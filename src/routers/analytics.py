@@ -6,10 +6,16 @@ from typing import Optional
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
+from src.core.deps import require_admin
 from src.database.database import get_db
 from src.services import analytics, summarizer
 
-router = APIRouter(prefix="/analytics", tags=["analytics"])
+# Every route here is admin-only: analytics are the product manager's view.
+router = APIRouter(
+    prefix="/analytics",
+    tags=["analytics"],
+    dependencies=[Depends(require_admin)],
+)
 
 
 @router.get("/overview")

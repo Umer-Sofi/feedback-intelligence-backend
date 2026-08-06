@@ -8,6 +8,7 @@ from src.database.database import Base, engine
 # registers their classes on Base.metadata, so create_all knows about them.
 from src.models import feedback as _feedback_models  # noqa: F401
 from src.models import chat as _chat_models  # noqa: F401
+from src.models import user as _user_models  # noqa: F401
 
 
 def init_db() -> None:

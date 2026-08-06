@@ -6,7 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.database.init_db import init_db
-from src.routers import analytics, chat, feedback
+from src.routers import analytics, auth, chat, feedback
 
 
 @asynccontextmanager
@@ -41,6 +41,7 @@ def health() -> dict:
     return {"status": "ok"}
 
 
+app.include_router(auth.router)
 app.include_router(feedback.router)
 app.include_router(analytics.router)
 app.include_router(chat.router)
