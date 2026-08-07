@@ -33,14 +33,15 @@ def _to_dt(d: date) -> datetime:
 
 def generate_weekly_summary(
     db: Session, start: Optional[date] = None, days: int = 7
-) -> str:
-    """Produce a narrative summary for one week.
+) -> dict:
+    """Produce a narrative summary + the week's chartable stats.
 
     `start` -> the `days`-day week beginning on that date;
     omitted  -> the rolling last `days` days.
 
-    Headline stats are scoped to the week; theme trends use a rolling
-    window ending at the week's end; only the start date is shown.
+    Returns {summary, categories, sentiment, period}. Headline stats are
+    scoped to the week; theme trends use a rolling window ending at the
+    week's end; only the start date is shown.
     """
     if start:
         since = _to_dt(start)
@@ -51,14 +52,23 @@ def generate_weekly_summary(
     from_d = since.date().isoformat()
 
     stats = analytics.overview(db, since=since, until=until)
+    # Keep the week's category + sentiment breakdown for the UI charts
+    # (before themes are trimmed for the prompt below).
+    categories = stats["categories"]
+    sentiment_counts = stats["sentiment"]["counts"]
 
     # No feedback in the window: say so plainly instead of grounding on
     # quotes from other weeks (retrieval isn't date-scoped). Skips the LLM.
     if stats["total_processed"] == 0:
-        return (
-            f"No customer feedback was received for the week "
-            f"starting {from_d}."
-        )
+        return {
+            "summary": (
+                f"No customer feedback was received for the week "
+                f"starting {from_d}."
+            ),
+            "categories": {},
+            "sentiment": {},
+            "period": {"from": from_d, "count": 0},
+        }
 
     # Keep only recurring themes (drop one-off singletons) and cap the count,
     # so the prompt highlights real trends instead of a wall of noise.
@@ -82,4 +92,9 @@ def generate_weekly_summary(
     messages = build_summary_messages(stats, quotes, period)
     summary = chat(messages, model=settings.openai_summary_model)
     logger.info("Generated weekly summary (%d chars)", len(summary))
-    return summary
+    return {
+        "summary": summary,
+        "categories": categories,
+        "sentiment": sentiment_counts,
+        "period": period,
+    }

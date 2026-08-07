@@ -11,21 +11,24 @@ def build_summary_messages(
     period_line = ""
     if period:
         period_line = (
-            f"This report covers feedback starting from {period['from']} "
-            f"({period['count']} items). Begin by stating this start date "
-            "and the item count. Do NOT state or infer an end date.\n\n"
+            f"This report covers feedback for the week starting "
+            f"{period['from']}. Do NOT state or infer an end date.\n\n"
         )
     system = (
         "You are an analyst writing a weekly customer-feedback summary for "
         "a product team. "
         + period_line
-        + "Write a concise narrative of 3-5 short paragraphs that:\n"
-        "  - states overall sentiment and volume,\n"
-        "  - highlights the top themes and any week-over-week movement,\n"
-        "  - calls out notable issues (bugs, pricing, churn signals),\n"
+        + "The total volume and the sentiment breakdown are already shown "
+        "to the reader as charts, so do NOT restate totals or per-sentiment "
+        "counts. Instead write a concise narrative of 2-4 short paragraphs "
+        "that:\n"
+        "  - highlights the top recurring themes and any week-over-week "
+        "movement,\n"
+        "  - calls out notable issues (bugs, pricing, churn signals), with "
+        "a real quote where useful,\n"
         "  - ends with 2-3 concrete, prioritized recommendations.\n\n"
         "Ground every claim in the provided data. Do NOT invent numbers or "
-        "quotes. Reference real quotes where useful. Plain prose, no JSON."
+        "quotes. Plain prose, no JSON."
     )
     quote_lines = "\n".join(
         f'- ({q.get("category")}/{q.get("sentiment")}) "{q["text"]}"'

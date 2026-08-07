@@ -29,8 +29,9 @@ def weekly_summary(
     start: Optional[date] = None,
     db: Session = Depends(get_db),
 ) -> dict:
-    """Return the RAG-grounded summary for one week.
+    """Return the RAG-grounded summary + week stats for one week.
 
     `start` (YYYY-MM-DD) picks the week; omit it for the last 7 days.
+    Response: {summary, categories, sentiment, period}.
     """
-    return {"summary": summarizer.generate_weekly_summary(db, start=start)}
+    return summarizer.generate_weekly_summary(db, start=start)
