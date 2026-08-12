@@ -123,7 +123,8 @@ def answer_question(
 
     history = _recent_history(db, session)
 
-    if _is_listing_query(question):
+    listing = _is_listing_query(question)
+    if listing:
         # "recent/latest/list" is about time, not meaning: return the newest
         # feedback directly (vector search can't order by recency).
         retrieved = _recent_feedback(
@@ -144,9 +145,15 @@ def answer_question(
             db, standalone, n_results=5, user_id=scope_user_id
         )
 
-    # 3. Generate a grounded answer.
+    # 3. Generate a grounded answer. The user-scoped bot answers about the
+    #    user's OWN feedback, so frame the items as "your feedback".
     answer = chat(
-        build_answer_messages(question, retrieved),
+        build_answer_messages(
+            question,
+            retrieved,
+            personal=scope_user_id is not None,
+            listing=listing,
+        ),
         model=settings.openai_chat_model,
         max_tokens=_ANSWER_MAX_TOKENS,
     )
